@@ -1,3 +1,6 @@
+@import './_mixin';
+
+
 *,
 *::before,
 *::after {
@@ -31,7 +34,7 @@ html, body {
 
             .imgs {
                 display: flex;
-                justify-content: center;
+                justify-content: space-around;
                 align-items: center;
 
                 img {
@@ -56,8 +59,10 @@ html, body {
         .header {
             display: grid;
             place-items: center;
+            background: #000;
     
             h1 {
+                color: #fff;
                 font-size: 2rem;
             }
         };
@@ -72,17 +77,28 @@ html, body {
         }
 
         .dropMenu {
+            border-radius: 10%;
             background: #000;
             position: absolute;
-            height: 25rem;
-            width: 10rem;
+            height: 15rem;
+            width: 15rem;
             display: none;
             flex-direction: column;
 
             .dropMenuContainer {
-                img {
-                    height: 5rem;
-                    width: 5rem;
+                height: 33.3333%;
+                display: grid;
+                place-items: center;
+
+                p {
+                    cursor: pointer;
+                    color: #fff;
+                    font-size: 1.5rem;
+
+                    &:hover {
+                        transition: .3s ease-in-out;
+                        font-size: 1.7rem;
+                    }
                 }
             }
         }

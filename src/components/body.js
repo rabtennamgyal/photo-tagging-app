@@ -1,8 +1,7 @@
 import main from '../assets/main.jpg'; 
-import char from '../assets/pokemons/Charmander.gif';
 
 
-function Body({displayDropMenu}) {
+function Body({displayDropMenu, checkImg}) {
     return (
         <div className='content'>
             <div className='header'>
@@ -17,27 +16,21 @@ function Body({displayDropMenu}) {
 
             <div className='dropMenu' id='dropDownMenu'>
                 <div className='dropMenuContainer'>
-                    <img src={char} alt='img' />
-
-                    <h1>
-                        mario
-                    </h1>
+                    <p>
+                        Charmander
+                    </p>
                 </div>
 
                 <div className='dropMenuContainer'>
-                    <img src={char} alt='img' />
-
-                    <h1>
-                        Link
-                    </h1>
+                    <p>
+                        Squirtle
+                    </p>
                 </div>
 
                 <div className='dropMenuContainer'>
-                    <img src={char} alt='img' />
-
-                    <h1>
-                        Kong
-                    </h1>
+                    <p onClick={checkImg}>
+                        Bulbasuar
+                    </p>
                 </div>
             </div>
         </div>
