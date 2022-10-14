@@ -10,7 +10,7 @@ function Body({displayDropMenu, checkImg}) {
                 </h1>
             </div>
 
-            <div className='body'>
+            <div className='body' id='box'>
                 <img src={main} alt='image with many pokemons' onClick={displayDropMenu}/>
             </div>
 

@@ -1,4 +1,5 @@
-import firebase from 'firebase/compat/app';
+// import firebase from 'firebase/compat/app';
+import { initializeApp } from 'firebase/app'
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { useState } from "react";
 import Modal from './components/modal';
@@ -14,7 +15,7 @@ const firebaseConfig = {
     appId: "1:887035925496:web:6a3851ad05abfed53e3c0d"
 };
 
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
@@ -39,6 +40,9 @@ function App() {
   const [modal, setModal] = useState(true);
   const [menuShown, setMenuShown] = useState(true);
   const [coords, setCoords] = useState('');
+  const [coords2, setCoords2] = useState('');
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
   const startGame = () => {
     setModal(false);
@@ -62,6 +66,9 @@ function App() {
 
     // 2. Saves the Coords of the Click
     setCoords(e.pageX);
+    setCoords2(e.pageY);
+    setWidth(e.target.width);
+    setHeight(e.target.height);
   };
 
   const checkImg = () => {
@@ -76,17 +83,33 @@ function App() {
           })
       });
 
-      bulb = poke[0].coords.split(',').map(el => Number(el));
+      let data1 = poke[0].x.split(',').map(el => Number(el));
+      let data2 = poke[0].y.split(',').map(el => Number(el));
 
-      if (coords >= bulb[0] && coords <= bulb[1]) {
-        console.log('Bulbasaur found.')
+      let diff = width - coords;
+      let per = diff / width;
+
+      let diff2 = height - coords2;
+      let per2 = diff2 / height;
+
+      let x = per.toFixed(2);
+      let y = per2.toFixed(2);
+
+      if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
+        console.log('Bulbasuar Found !!!');
       } else {
-        console.log('Keep trying')
+        console.log('Try Again');
       }
     })
     .catch(err => {
       console.log(err.message)
     });
+
+    setMenuShown(prevCheck => !prevCheck);
+    const dropDownMenu = document.getElementById('dropDownMenu');
+    dropDownMenu.style.display = 'none';
+    dropDownMenu.style.top = '0px';
+    dropDownMenu.style.left = '0px';
   }
 
   return (
