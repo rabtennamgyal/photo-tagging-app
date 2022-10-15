@@ -1,4 +1,6 @@
-import charmander from '../assets/pokemons/Charmander.gif';
+import bulbasaur from '../assets/pokemons/001Bulbasaur.webp';
+import croconaw from '../assets/pokemons/159Croconaw.png';
+import slugma from '../assets/pokemons/218Slugma.png';
 
 
 function Modal({startGame}) {
@@ -10,9 +12,9 @@ function Modal({startGame}) {
 
             <div className="card">
                 <div className="imgs">
-                    <img src={charmander} alt='A Charmander looking jolly' />
-                    <img src={charmander} alt='A Charmander looking jolly' />
-                    <img src={charmander} alt='A Charmander looking jolly' />
+                    <img src={bulbasaur} alt='A Pokemon' />
+                    <img src={croconaw} alt='A Pokemon' />
+                    <img src={slugma} alt='A Pokemon' />
                 </div>
 
                 <button id='start' onClick={startGame}>

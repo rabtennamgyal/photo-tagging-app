@@ -1,7 +1,7 @@
 import main from '../assets/main.jpg'; 
 
 
-function Body({displayDropMenu, checkImg}) {
+function Body({displayDropMenu, checkImg, checkImg2, checkImg3}) {
     return (
         <div className='content'>
             <div className='header'>
@@ -16,14 +16,14 @@ function Body({displayDropMenu, checkImg}) {
 
             <div className='dropMenu' id='dropDownMenu'>
                 <div className='dropMenuContainer'>
-                    <p>
-                        Charmander
+                    <p onClick={checkImg3}>
+                        Slugma
                     </p>
                 </div>
 
                 <div className='dropMenuContainer'>
-                    <p>
-                        Squirtle
+                    <p onClick={checkImg2}>
+                        Croconaw
                     </p>
                 </div>
 

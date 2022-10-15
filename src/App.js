@@ -21,20 +21,6 @@ const db = getFirestore();
 
 const colRef = collection(db, 'characters');
 
-// getDocs(colRef).then((snapshot) => {
-//     let poke = [];
-//     snapshot.docs.forEach((doc) => {
-//         poke.push({
-//             ...doc.data(),
-//             id: doc.id
-//         })
-//     });
-//     console.log(poke)
-// })
-// .catch(err => {
-//     console.log(err.message)
-// })
-
 function App() {
   const [start, setStart] = useState(false);
   const [modal, setModal] = useState(true);
@@ -43,6 +29,7 @@ function App() {
   const [coords2, setCoords2] = useState('');
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+
 
   const startGame = () => {
     setModal(false);
@@ -112,10 +99,95 @@ function App() {
     dropDownMenu.style.left = '0px';
   }
 
+  const checkImg2 = () => {
+    let bulb;
+
+    getDocs(colRef).then((snapshot) => {
+      let poke = [];
+      snapshot.docs.forEach((doc) => {
+          poke.push({
+              ...doc.data(),
+              id: doc.id
+          })
+      });
+
+      let data1 = poke[2].x.split(',').map(el => Number(el));
+      let data2 = poke[2].y.split(',').map(el => Number(el));
+
+      let diff = width - coords;
+      let per = diff / width;
+
+      let diff2 = height - coords2;
+      let per2 = diff2 / height;
+
+      let x = per.toFixed(2);
+      let y = per2.toFixed(2);
+
+      if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
+        console.log('Croconaw !!!');
+      } else {
+        console.log('Try Again');
+      }
+    })
+    .catch(err => {
+      console.log(err.message)
+    });
+
+    setMenuShown(prevCheck => !prevCheck);
+    const dropDownMenu = document.getElementById('dropDownMenu');
+    dropDownMenu.style.display = 'none';
+    dropDownMenu.style.top = '0px';
+    dropDownMenu.style.left = '0px';
+  }
+
+  const checkImg3 = () => {
+    let bulb;
+
+    getDocs(colRef).then((snapshot) => {
+      let poke = [];
+      snapshot.docs.forEach((doc) => {
+          poke.push({
+              ...doc.data(),
+              id: doc.id
+          })
+      });
+
+      let data1 = poke[1].x.split(',').map(el => Number(el));
+      let data2 = poke[1].y.split(',').map(el => Number(el));
+
+      let diff = width - coords;
+      let per = diff / width;
+
+      let diff2 = height - coords2;
+      let per2 = diff2 / height;
+
+      let x = per.toFixed(2);
+      let y = per2.toFixed(2);
+
+      console.log(x, y)
+
+      if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
+        console.log('Slugma !!!');
+      } else {
+        console.log('Try Again');
+      }
+    })
+    .catch(err => {
+      console.log(err.message)
+    });
+
+    setMenuShown(prevCheck => !prevCheck);
+    const dropDownMenu = document.getElementById('dropDownMenu');
+    dropDownMenu.style.display = 'none';
+    dropDownMenu.style.top = '0px';
+    dropDownMenu.style.left = '0px';
+  }
+
+
   return (
     <div className='app'>
       {modal && <Modal startGame={startGame} />}
-      {start && <Body displayDropMenu={displayDropMenu} checkImg={checkImg} />}
+      {start && <Body displayDropMenu={displayDropMenu} checkImg={checkImg} checkImg2={checkImg2} checkImg3={checkImg3} />}
     </div>
   )
 }
