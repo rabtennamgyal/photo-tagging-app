@@ -30,6 +30,27 @@ function App() {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
+  const charFound = (id) => {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'grid';
+    const h1 = document.createElement('h1');
+    h1.classList.add('thetext');
+    h1.textContent = `${id} Found ✔.`;
+    popup.appendChild(h1);
+
+    const img = document.getElementById(id);
+    img.style.opacity = '0.5';
+  };
+
+  const charNotFound = (id) => {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'grid';
+    const h1 = document.createElement('h1');
+    h1.textContent = `Try Again 😤`;
+    h1.classList.add('thetext');
+    popup.appendChild(h1);
+  };
+
   const startGame = () => {
     setModal(false);
     setStart(true);
@@ -82,9 +103,9 @@ function App() {
       let y = per2.toFixed(2);
 
       if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
-        alert('Bulbasuar Found !!!')
+        charFound('Bulbasaur');
       } else {
-        alert('Try again.')
+        charNotFound();
       }
     })
     .catch(err => {
@@ -123,9 +144,9 @@ function App() {
       let y = per2.toFixed(2);
 
       if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
-        console.log('Croconaw !!!');
+        charFound('Croconaw');
       } else {
-        console.log('Try Again');
+        charNotFound();
       }
     })
     .catch(err => {
@@ -163,12 +184,10 @@ function App() {
       let x = per.toFixed(2);
       let y = per2.toFixed(2);
 
-      console.log(x, y)
-
       if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
-        console.log('Slugma !!!');
+        charFound('Slugma');
       } else {
-        console.log('Try Again');
+        charNotFound();
       }
     })
     .catch(err => {

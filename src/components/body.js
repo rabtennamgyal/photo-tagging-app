@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import main from '../assets/main.jpg'; 
 import bulbasaur from '../assets/pokemons/001Bulbasaur.webp';
 import croconaw from '../assets/pokemons/159Croconaw.png';
@@ -6,7 +5,15 @@ import slugma from '../assets/pokemons/218Slugma.png';
 
 
 
-function Body({ displayDropMenu, checkImg, checkImg2, checkImg3 }) { 
+function Body({ displayDropMenu, checkImg, checkImg2, checkImg3 }) {   
+    const closePopUp = () => {
+        const popup = document.getElementById('popup');
+        const h1 = document.querySelector('.thetext')
+
+        popup.style.display = 'none';
+        popup.removeChild(h1);
+    };
+
     return (
         <div className='content'>
             <div className='header'>
@@ -15,9 +22,9 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3 }) {
                 </h1>
 
                 <div className='items'>
-                    <img id='bulb' src={bulbasaur} alt='a pokemon' />
-                    <img id='croc' src={croconaw} alt='a pokemon' />
-                    <img id='slug' src={slugma} alt='a pokemon' />
+                    <img id='Bulbasaur' src={bulbasaur} alt='a pokemon' />
+                    <img id='Croconaw' src={croconaw} alt='a pokemon' />
+                    <img id='Slugma' src={slugma} alt='a pokemon' />
                 </div>
             </div>
 
@@ -43,6 +50,12 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3 }) {
                         Bulbasuar
                     </p>
                 </div>
+            </div>
+
+            <div className='popup' id='popup'>
+                <p id='close' onClick={closePopUp}>
+                    &#10005;
+                </p>
             </div>
         </div>
     )
