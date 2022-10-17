@@ -30,7 +30,6 @@ function App() {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
 
-
   const startGame = () => {
     setModal(false);
     setStart(true);
@@ -83,9 +82,9 @@ function App() {
       let y = per2.toFixed(2);
 
       if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
-        console.log('Bulbasuar Found !!!');
+        alert('Bulbasuar Found !!!')
       } else {
-        console.log('Try Again');
+        alert('Try again.')
       }
     })
     .catch(err => {
