@@ -29,6 +29,7 @@ function App() {
   const [coords2, setCoords2] = useState('');
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const [count, setCount] = useState(0);
 
   const charFound = (id) => {
     const popup = document.getElementById('popup');
@@ -42,7 +43,7 @@ function App() {
     img.style.opacity = '0.5';
   };
 
-  const charNotFound = (id) => {
+  const charNotFound = () => {
     const popup = document.getElementById('popup');
     popup.style.display = 'grid';
     const h1 = document.createElement('h1');
@@ -104,6 +105,7 @@ function App() {
 
       if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
         charFound('Bulbasaur');
+        setCount(count + 1);
       } else {
         charNotFound();
       }
@@ -145,6 +147,7 @@ function App() {
 
       if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
         charFound('Croconaw');
+        setCount(count + 1);
       } else {
         charNotFound();
       }
@@ -186,6 +189,7 @@ function App() {
 
       if (x >= data1[0] && x <= data1[1] && y >= data2[0] && y <= data2[1]) {
         charFound('Slugma');
+        setCount(count + 1);
       } else {
         charNotFound();
       }

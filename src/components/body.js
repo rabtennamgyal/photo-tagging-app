@@ -57,6 +57,35 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3 }) {
                     &#10005;
                 </p>
             </div>
+
+            <div className='gameOver' id='gameOver'>
+                <div className='titleBox'>
+                    <h1>
+                        You finished in 
+                    </h1>
+                </div>
+
+                <div className='inputBox'>
+                    <h1>
+                        Sumbit your score:
+                    </h1>
+
+                    <form>
+                        <label form='username'>Username:</label>
+                        <input type='text' id='username'></input>
+                    </form>
+
+                    <div className='btns'>
+                        <button id='cancel'>
+                            Cancel
+                        </button>
+
+                        <button id='submit'>
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 };
