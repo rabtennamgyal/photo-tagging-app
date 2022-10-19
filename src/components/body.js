@@ -5,7 +5,7 @@ import slugma from '../assets/pokemons/218Slugma.png';
 
 
 
-function Body({ displayDropMenu, checkImg, checkImg2, checkImg3 }) {   
+function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, minute, second, millisecond }) {   
     const closePopUp = () => {
         const popup = document.getElementById('popup');
         const h1 = document.querySelector('.thetext')
@@ -14,9 +14,18 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3 }) {
         popup.removeChild(h1);
     };
 
+    const closeGameOver = () => {
+        const gameOver = document.getElementById('gameOver');
+        gameOver.style.display = 'none';
+    } 
+
     return (
         <div className='content'>
             <div className='header'>
+                <div className="timer">
+                    <span id="minute">00</span>:<span id="second">00</span>:<span id="millisecond">000</span>
+                </div>
+
                 <h1>
                     Find these Pokemons:
                 </h1>
@@ -61,7 +70,7 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3 }) {
             <div className='gameOver' id='gameOver'>
                 <div className='titleBox'>
                     <h1>
-                        You finished in 
+                        {`You finished in ${minute}:${second}:${millisecond}`}
                     </h1>
                 </div>
 
@@ -76,7 +85,7 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3 }) {
                     </form>
 
                     <div className='btns'>
-                        <button id='cancel'>
+                        <button id='cancel' onClick={closeGameOver}>
                             Cancel
                         </button>
 
