@@ -1,7 +1,7 @@
 // import firebase from 'firebase/compat/app';
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./components/modal";
 import Body from "./components/body";
 
@@ -28,13 +28,24 @@ function App() {
   const [coords2, setCoords2] = useState("");
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const [time, setTime] = useState(0);
+  const [timer, startTimer] = useState(false);
   const [count, setCount] = useState(0);
 
-  let minute = 0;
-  let second = 0;
-  let millisecond = 0;
+  useEffect(() => {
+    let interval = null;
 
-  let cron;
+    if (timer) {
+      interval = setInterval(() => {
+        setTime(prevTime => prevTime + 10)
+      }, 10)
+    } else {
+      clearInterval(interval)
+    }
+
+    return () => clearInterval(interval)
+  }, [timer]);
+
 
   const charFound = (id) => {
     const popup = document.getElementById("popup");
@@ -60,7 +71,7 @@ function App() {
   const startGame = () => {
     setModal(false);
     setStart(true);
-    startTimer();
+    startTimer(true);
   };
 
   const displayDropMenu = (e) => {
@@ -214,66 +225,17 @@ function App() {
     dropDownMenu.style.left = "0px";
   };
 
-  const startTimer = () => {
-    clearInterval(cron);
-
-    cron = setInterval(() => {
-      timer();
-    }, 10);
-  };
-
-  const timer = () => {
-    if ((millisecond += 10) == 1000) {
-      millisecond = 0;
-      second++;
-    }
-    if (second == 60) {
-      second = 0;
-      minute++;
-    }
-    if (minute == 60) {
-      minute = 0;
-    }
-
-    document.getElementById("minute").innerText = returnData(minute);
-    document.getElementById("second").innerText = returnData(second);
-    document.getElementById("millisecond").innerText = returnData(millisecond);
-  };
-
-  const returnData = (input) => {
-    return input > 10 ? input : `0${input}`;
-  };
-
-  
   if (count === 3) {
     const gameOver = document.getElementById("gameOver");
     const popup = document.getElementById("popup");
-    //const h1 = document.querySelector('.thetext')
 
     popup.style.display = "none";
-    // popup.removeChild(h1);
     gameOver.style.display = "block"; 
-    clearInterval(cron);
-
-    let min = document.getElementById("minute").textContent;
-    let sec = document.getElementById("second").textContent;
-    let mil = document.getElementById("millisecond").textContent;
-    minute = min;
-    second = sec;
-    millisecond = mil;
-
+    
     setTimeout(() => {
-      minute = 0;
-      second = 0;
-      millisecond = 0;
-      document.getElementById('minute').innerText = '00';
-      document.getElementById('second').innerText = '00';
-      document.getElementById('millisecond').innerText = '000';
-
-      console.log(minute, second, millisecond)
-    }, 2000)
+      startTimer(false);
+    }, 1);
   }
-
 
   return (
     <div className="app">
@@ -284,9 +246,9 @@ function App() {
           checkImg={checkImg}
           checkImg2={checkImg2}
           checkImg3={checkImg3}
-          minute={minute}
-          second={second}
-          millisecond={millisecond}
+          time={time}
+          setTime={setTime}
+          setCount={setCount}
         />
       )}
     </div>

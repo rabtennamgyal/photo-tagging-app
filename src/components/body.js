@@ -5,7 +5,7 @@ import slugma from '../assets/pokemons/218Slugma.png';
 
 
 
-function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, minute, second, millisecond }) {   
+function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, setCount }) {   
     const closePopUp = () => {
         const popup = document.getElementById('popup');
         const h1 = document.querySelector('.thetext')
@@ -17,13 +17,26 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, minute, second,
     const closeGameOver = () => {
         const gameOver = document.getElementById('gameOver');
         gameOver.style.display = 'none';
+
+        setTimeout(() => {
+            setTime(0);
+            setCount(0);
+        }, 500);
+
+
+        // Change the images opacity back to 1
+        
+        // const img = document.getElementById(id);
+        // img.style.opacity = "0.5";
     } 
 
     return (
         <div className='content'>
             <div className='header'>
                 <div className="timer">
-                    <span id="minute">00</span>:<span id="second">00</span>:<span id="millisecond">000</span>
+                    <span>{('0' + Math.floor((time / 60000) % 60)).slice(-2)}</span>:
+                    <span>{('0' + Math.floor((time / 1000) % 60)).slice(-2)}</span>:
+                    <span>{('0' + ((time / 10) % 100)).slice(-2)}</span>
                 </div>
 
                 <h1>
@@ -69,8 +82,10 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, minute, second,
 
             <div className='gameOver' id='gameOver'>
                 <div className='titleBox'>
-                    <h1>
-                        {`You finished in ${minute}:${second}:${millisecond}`}
+                    <h1> 
+                        You finished in {('0' + Math.floor((time / 60000) % 60)).slice(-2)}:
+                        {('0' + Math.floor((time / 1000) % 60)).slice(-2)}:
+                        {('0' + ((time / 10) % 100)).slice(-2)}
                     </h1>
                 </div>
 
