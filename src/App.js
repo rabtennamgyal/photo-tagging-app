@@ -19,6 +19,7 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 const colRef = collection(db, "characters");
+const userdata = collection(db, "userdata");
 
 function App() {
   const [start, setStart] = useState(false);
@@ -225,13 +226,30 @@ function App() {
     dropDownMenu.style.left = "0px";
   };
 
+  const x = () => {
+    const input = document.getElementById('username');
+    const min = document.getElementById('min');
+    const sec = document.getElementById('sec');
+    const mill = document.getElementById('mill');
+
+    let username = input.value;
+    let usertime = `${min.textContent}:${sec.textContent}:${mill.textContent}`;
+    
+    // userdata.add({
+    //   username: username,
+    //   usertime: usertime
+    // });
+
+    console.log(userdata)
+  };
+
   if (count === 3) {
     const gameOver = document.getElementById("gameOver");
     const popup = document.getElementById("popup");
 
     popup.style.display = "none";
-    gameOver.style.display = "block"; 
-    
+    gameOver.style.display = "block";
+
     setTimeout(() => {
       startTimer(false);
     }, 1);
@@ -249,6 +267,7 @@ function App() {
           time={time}
           setTime={setTime}
           setCount={setCount}
+          x={x}
         />
       )}
     </div>

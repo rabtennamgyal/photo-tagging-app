@@ -5,7 +5,7 @@ import slugma from '../assets/pokemons/218Slugma.png';
 
 
 
-function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, setCount }) {   
+function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, setCount, x }) {   
     const closePopUp = () => {
         const popup = document.getElementById('popup');
         const h1 = document.querySelector('.thetext')
@@ -21,6 +21,7 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, 
         setTimeout(() => {
             setTime(0);
             setCount(0);
+            closePopUp();
         }, 500);
 
 
@@ -28,15 +29,17 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, 
         
         // const img = document.getElementById(id);
         // img.style.opacity = "0.5";
+
+        // Get rid of the 
     } 
 
     return (
         <div className='content'>
             <div className='header'>
                 <div className="timer">
-                    <span>{('0' + Math.floor((time / 60000) % 60)).slice(-2)}</span>:
-                    <span>{('0' + Math.floor((time / 1000) % 60)).slice(-2)}</span>:
-                    <span>{('0' + ((time / 10) % 100)).slice(-2)}</span>
+                    <span id='min'>{('0' + Math.floor((time / 60000) % 60)).slice(-2)}</span>:
+                    <span id='sec'>{('0' + Math.floor((time / 1000) % 60)).slice(-2)}</span>:
+                    <span id='mill'>{('0' + ((time / 10) % 100)).slice(-2)}</span>
                 </div>
 
                 <h1>
@@ -104,7 +107,7 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, 
                             Cancel
                         </button>
 
-                        <button id='submit'>
+                        <button id='submit' onClick={x}>
                             Submit
                         </button>
                     </div>

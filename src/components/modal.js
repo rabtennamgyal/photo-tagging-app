@@ -7,7 +7,7 @@ function Modal({startGame}) {
     return (
         <div className="modal">
             <h1>
-                Find these Pokemons:
+                Find these Pokemons
             </h1>
 
             <div className="card">
