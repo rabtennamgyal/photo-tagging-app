@@ -1,6 +1,6 @@
 // import firebase from 'firebase/compat/app';
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, setDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Modal from "./components/modal";
 import Body from "./components/body";
@@ -226,7 +226,7 @@ function App() {
     dropDownMenu.style.left = "0px";
   };
 
-  const x = () => {
+  const x = async () => {
     const input = document.getElementById('username');
     const min = document.getElementById('min');
     const sec = document.getElementById('sec');
@@ -234,11 +234,11 @@ function App() {
 
     let username = input.value;
     let usertime = `${min.textContent}:${sec.textContent}:${mill.textContent}`;
-    
-    // userdata.add({
-    //   username: username,
-    //   usertime: usertime
-    // });
+
+    await setDoc(doc(db, 'userdata', username), {
+      name: username,
+      time: usertime
+    });
 
     console.log(userdata)
   };
