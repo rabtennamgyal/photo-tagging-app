@@ -242,4 +242,69 @@ html, body {
             }
         }
     }
+
+    .scoreboard {
+        position: relative;
+        height: 100vh;
+        background: #000;
+        display: grid;
+        grid-template-rows: 10% 90%;
+
+        .header {
+            display: grid;
+            place-items: center;
+
+            h1 {
+                color: #fff;
+                font-size: 3rem;
+            }
+
+            button {
+                position: absolute;
+                cursor: pointer;
+                border: none;
+                height: 2.5rem;
+                width: 5rem;
+                border-radius: 2rem;
+                left: 5%;
+            }
+        }
+
+        .scores {
+            display: grid;
+            grid-template-rows: 5% 95%;
+
+            .userInfo {
+                display: grid;
+                grid-template-columns: 10% 45% 45%;
+                background: grey;
+                align-items: center;
+
+                h1 {
+                    margin: 0 1rem;
+                    color: #fff;
+                    font-size: 2rem;
+                }
+            }
+
+            .userData {
+
+                .divstyle {
+                    display: grid;
+                    grid-template-columns: 10% 45% 45%;
+                    align-items: center;
+
+                    p {
+                        margin: 0 1rem;
+                        color: #fff;
+                        font-size: 1.7rem;
+                    }
+                }
+
+                .rankstyle {
+                    justify-self: center;
+                }
+            }
+        }
+    }
 }

@@ -4,6 +4,9 @@ import { getFirestore, collection, getDocs, setDoc, doc } from "firebase/firesto
 import { useEffect, useState } from "react";
 import Modal from "./components/modal";
 import Body from "./components/body";
+import Scoreboard from "./components/scoreboard";
+// Helper Functions
+import resetAll from "./components/helper";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDzJIt9v_oEv0u4Pv-gCaWU0DO_FGRALRQ",
@@ -19,11 +22,12 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 const colRef = collection(db, "characters");
-const userdata = collection(db, "userdata");
+const userRef = collection(db, 'userdata');
 
 function App() {
   const [start, setStart] = useState(false);
   const [modal, setModal] = useState(true);
+  const [showScore, setShowScore] = useState(false)
   const [menuShown, setMenuShown] = useState(true);
   const [coords, setCoords] = useState("");
   const [coords2, setCoords2] = useState("");
@@ -226,7 +230,7 @@ function App() {
     dropDownMenu.style.left = "0px";
   };
 
-  const x = async () => {
+  const submitData = async () => {
     const input = document.getElementById('username');
     const min = document.getElementById('min');
     const sec = document.getElementById('sec');
@@ -240,7 +244,14 @@ function App() {
       time: usertime
     });
 
-    console.log(userdata)
+    resetAll();
+    setTimeout(() => {
+      setTime(0);
+      setCount(0);
+      setShowScore(true);
+      setStart(false);
+      getUserData();
+  }, 500);
   };
 
   if (count === 3) {
@@ -255,6 +266,60 @@ function App() {
     }, 1);
   }
 
+  const getUserData = () => {
+    getDocs(userRef)
+    .then((snapshot) => {
+      let arr = [];
+
+      snapshot.docs.forEach((doc) => {
+        arr.push({
+          ...doc.data(),
+          id: doc.id,
+        });
+      });
+
+      const userData = document.getElementById('userData');
+
+      function compare(a, b) {
+        if (a.time < b.time) {
+          return -1;
+        }
+
+        if (a.time > b.time) {
+          return 1;
+        }
+
+        return 0;
+      };
+
+      const rank = arr.sort(compare);
+
+      rank.forEach((el, i) => {
+        const div = document.createElement('div');
+        div.classList.add('divstyle');
+
+        const rank = document.createElement('p');
+        rank.textContent = i;
+        rank.classList.add('rankstyle');
+
+        const name = document.createElement('p');
+        name.textContent = el.name;
+
+        const time = document.createElement('p');
+        time.textContent = el.time;
+
+        div.appendChild(rank);
+        div.appendChild(name);
+        div.appendChild(time);
+
+        userData.appendChild(div);
+      })
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+  };
+
   return (
     <div className="app">
       {modal && <Modal startGame={startGame} />}
@@ -267,9 +332,12 @@ function App() {
           time={time}
           setTime={setTime}
           setCount={setCount}
-          x={x}
+          submitData={submitData}
         />
       )}
+      {
+        showScore && <Scoreboard getUserData={getUserData} setShowScore={setShowScore} setModal={setModal} />
+      }
     </div>
   );
 }

@@ -5,7 +5,7 @@ import slugma from '../assets/pokemons/218Slugma.png';
 
 
 
-function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, setCount, x }) {   
+function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, setCount, submitData }) {   
     const closePopUp = () => {
         const popup = document.getElementById('popup');
         const h1 = document.querySelector('.thetext')
@@ -23,15 +23,7 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, 
             setCount(0);
             closePopUp();
         }, 500);
-
-
-        // Change the images opacity back to 1
-        
-        // const img = document.getElementById(id);
-        // img.style.opacity = "0.5";
-
-        // Get rid of the 
-    } 
+    };
 
     return (
         <div className='content'>
@@ -107,7 +99,7 @@ function Body({ displayDropMenu, checkImg, checkImg2, checkImg3, time, setTime, 
                             Cancel
                         </button>
 
-                        <button id='submit' onClick={x}>
+                        <button id='submit' onClick={submitData}>
                             Submit
                         </button>
                     </div>
