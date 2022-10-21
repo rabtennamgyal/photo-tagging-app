@@ -237,6 +237,11 @@ function App() {
     const mill = document.getElementById('mill');
 
     let username = input.value;
+
+    if (!input.value) {
+      alert('Please input a username.');
+    }
+
     let usertime = `${min.textContent}:${sec.textContent}:${mill.textContent}`;
 
     await setDoc(doc(db, 'userdata', username), {
